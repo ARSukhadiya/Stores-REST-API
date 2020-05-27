@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -8,7 +10,9 @@ from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
 app = Flask(__name__)                       # make a flask object
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'     # sqlite, mysql, postgresql 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+#                                                       DATABASE_URL - postgres_db_env_variable's_URL from Heroku
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)                              # assign a flask-object to restful parameter Api to perform on Resource
 app.secret_key = 'jose'
