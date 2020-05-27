@@ -13,9 +13,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)                              # assign a flask-object to restful parameter Api to perform on Resource
 app.secret_key = 'jose'
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
+# @app.before_first_request
+# def create_tables():
+#     db.create_all()
 
 # initialize a JWT object-'jwt'
 jwt = JWT(app, authenticate, identity)      # /auth - create a new end-point
